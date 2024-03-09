@@ -1,0 +1,19 @@
+{
+  "cwd": "D:\\framework7\\login",
+  "type": [
+    "web",
+    "pwa"
+  ],
+  "name": "login",
+  "framework": "svelte",
+  "template": "blank",
+  "cssPreProcessor": false,
+  "bundler": "vite",
+  "theming": {
+    "customColor": true,
+    "color": "#ff0000",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false
+}
