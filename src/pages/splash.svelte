@@ -41,6 +41,8 @@
   let email = "";
   let password = "";
   let notificationPasswordError;
+  let emailTrue = "user@mail.com";
+  let passwordTrue = "1234Guruh@";
 
   let SwiperGroup = [
     {
@@ -68,26 +70,61 @@
   // Kumpulan function dibawah sini
 
   function loginDialog() {
-
-    const pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-!@#$%^&*()_=+[\]{}|\\;:'",.<>/?]).*$/;
-    const isValid = pattern.test(password);
-    if (!isValid) {
-      notificationPasswordError = f7.notification.create({
-        title: '<span class="text-red-700 font-bold">Invalid password!</span>',
-        titleRightText: 'now',
-        text: 'Pastikan password Anda mengandung setidaknya satu angka, satu huruf kecil, satu huruf kapital, dan satu simbol.',
-        closeTimeout: 2000,
-      });
-      notificationPasswordError.open();
-    } else {
-      f7.dialog.alert(`Email: ${email}<br>Password: ${password}`);
+    const isValidPassword = validatePassword(password);
+    if (!isValidPassword) {
+      validatePassword(password);
+      return;
     }
+    const isCredentialsValid =
+      isValidPassword && checkCredentials(email, password);
+
+    if (!isCredentialsValid) {
+      displayNotification("Invalid login!", "email/password tidak terdaftar");
+      return;
+    }
+
+    f7.dialog.alert("Selamat datang kembali!");
   }
+
+  function validatePassword(password) {
+    if (password.length < 3) {
+      displayNotification("Invalid password!", "Password minimal 3 karakter");
+      return false;
+    }
+
+    const pattern =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[-!@#$%^&*()_=+[\]{}|\\;:'",.<>/?]).*$/;
+    if (!pattern.test(password)) {
+      displayNotification(
+        "Invalid password!",
+        "Pastikan password Anda mengandung setidaknya satu angka, satu huruf kecil, satu huruf kapital, dan satu simbol."
+      );
+      return false;
+    }
+
+    return true;
+  }
+
+  function checkCredentials() {
+    // Di sini Anda perlu menambahkan logika untuk memeriksa kredensial di backend atau database
+
+    return email === emailTrue && password === passwordTrue;
+  }
+
+  function displayNotification(title, text) {
+    const notification = f7.notification.create({
+      title: `<span class="text-red-700 font-bold">${title}</span>`,
+      titleRightText: "now",
+      text: text,
+      closeTimeout: 2000,
+    });
+    notification.open();
+  }
+
   // End
 </script>
 
 <Page class="grid grid-flow-row auto-rows-max overflow-scroll">
-
   <swiper-container
     pagination={true}
     class="demo-swiper-multiple"
@@ -142,7 +179,7 @@
           clearButton
           onInput={(e) => (email = e.target.value)}
           value={email}
-          required 
+          required
           validate
         />
         <ListInput
@@ -152,9 +189,9 @@
           clearButton
           onInput={(e) => (password = e.target.value)}
           value={password}
-          required 
+          required
           validate
-          minlength=3
+          minlength="3"
           info="Minimal 3 karakter, gabungan angka,huruf,simbol,dan kapital"
         />
         <div class="mt-8 justify-center">
