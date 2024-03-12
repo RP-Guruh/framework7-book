@@ -14,6 +14,13 @@ var routes = [
     path: '/register',
     component: RegisterPage,
   },
+  {
+    path: '/dashboard',
+    component: HomePage,
+    options: {
+      transition: 'f7-circle',
+    }
+  },
 
 ];
 

@@ -43,7 +43,7 @@
   let notificationPasswordError;
   let emailTrue = "user@mail.com";
   let passwordTrue = "1234Guruh@";
-
+  
   let SwiperGroup = [
     {
       text: "Discover New",
@@ -82,8 +82,8 @@
       displayNotification("Invalid login!", "email/password tidak terdaftar");
       return;
     }
-
-    f7.dialog.alert("Selamat datang kembali!");
+    f7.view.main.router.navigate('/dashboard')
+    f7.sheet.close(".demo-sheet-swipe-to-close", true);
   }
 
   function validatePassword(password) {
@@ -106,13 +106,12 @@
   }
 
   function checkCredentials() {
-    // Di sini Anda perlu menambahkan logika untuk memeriksa kredensial di backend atau database
-
     return email === emailTrue && password === passwordTrue;
   }
 
   function displayNotification(title, text) {
     const notification = f7.notification.create({
+      icon: `<i class="f7-icons text-red-700 font-bold">exclamationmark_triangle</i>`,
       title: `<span class="text-red-700 font-bold">${title}</span>`,
       titleRightText: "now",
       text: text,
@@ -205,6 +204,7 @@
           >
         </div>
         <div class="flex mt-2 text-sm font-medium justify-center">
+          
           <Link
             sheetClose=".demo-sheet-swipe-to-close"
             href="/register"
