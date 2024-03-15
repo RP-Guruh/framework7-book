@@ -38,8 +38,8 @@
     }
   });
 
-  let email = "";
-  let password = "";
+  let email = "user@mail.com";
+  let password = "1234Guruh@";
   let notificationPasswordError;
   let emailTrue = "user@mail.com";
   let passwordTrue = "1234Guruh@";
@@ -123,99 +123,101 @@
   // End
 </script>
 
-<Page class="grid grid-flow-row auto-rows-max overflow-scroll">
-  <swiper-container
-    pagination={true}
-    class="demo-swiper-multiple"
-    space-between={5}
-  >
-    {#each SwiperGroup as item}
-      <swiper-slide>
-        <div>
-          <img src={item.picture} class="rounded-b-2xl" alt="not found" />
-        </div>
-        <div>
-          <BlockFooter>
-            <span class="text-3xl font-thin text-black flex justify-center">
-              {item.text}
-              {item.subText}
-            </span>
-          </BlockFooter>
-        </div>
-      </swiper-slide>
-    {/each}
-  </swiper-container>
 
-  <div class="flex justify-center buttonStarted lg:mb-4 mb-4 lg:mt-20 mt-10">
-    <Button
-      raised
-      fill
-      color="black"
-      class="w-44"
-      largeIos
-      sheetOpen=".demo-sheet-swipe-to-close">Get Started</Button
+  <Page class="grid grid-flow-row auto-rows-max overflow-x-hidden">
+    
+    <swiper-container
+      pagination={true}
+      class="demo-swiper-multiple"
+      space-between={5}
     >
-  </div>
-
-  <Sheet
-    class="demo-sheet-swipe-to-close"
-    style="height: auto"
-    swipeToClose
-    push
-    backdrop
-  >
-    <div class="swipe-handler" />
-    <PageContent>
-      <BlockTitle large>Welcome Back!</BlockTitle>
-      <div class="-mt-8">
-        <BlockTitle small>Enter Your Email & Password</BlockTitle>
-      </div>
-      <List strongIos dividersIos insetIos>
-        <ListInput
-          label="E-mail"
-          type="email"
-          placeholder="Your e-mail"
-          clearButton
-          onInput={(e) => (email = e.target.value)}
-          value={email}
-          required
-          validate
-        />
-        <ListInput
-          label="Password"
-          type="password"
-          placeholder="Your password"
-          clearButton
-          onInput={(e) => (password = e.target.value)}
-          value={password}
-          required
-          validate
-          minlength="3"
-          info="Minimal 3 karakter, gabungan angka,huruf,simbol,dan kapital"
-        />
-        <div class="mt-8 justify-center">
-          <Button
-            textColor="white"
-            borderColor="#545454"
-            bgColor="black"
-            largeIos
-            tonal
-            onClick={loginDialog}>Login</Button
-          >
+      {#each SwiperGroup as item}
+        <swiper-slide>
+          <div>
+            <img src={item.picture} class="rounded-b-2xl" alt="not found" />
+          </div>
+          <div>
+            <BlockFooter>
+              <span class="text-3xl font-thin text-black flex justify-center">
+                {item.text}
+                {item.subText}
+              </span>
+            </BlockFooter>
+          </div>
+        </swiper-slide>
+      {/each}
+    </swiper-container>
+  
+    <div class="flex justify-center buttonStarted lg:mb-4 mb-4 lg:mt-20 mt-10">
+      <Button
+        raised
+        fill
+        color="black"
+        class="w-44"
+        largeIos
+        sheetOpen=".demo-sheet-swipe-to-close">Get Started</Button
+      >
+    </div>
+  
+    <Sheet
+      class="demo-sheet-swipe-to-close"
+      style="height: auto"
+      swipeToClose
+      push
+      backdrop
+    >
+      <div class="swipe-handler" />
+      <PageContent>
+        <BlockTitle large>Welcome Back!</BlockTitle>
+        <div class="-mt-8">
+          <BlockTitle small>Enter Your Email & Password</BlockTitle>
         </div>
-        <div class="flex mt-2 text-sm font-medium justify-center">
-          
-          <Link
-            sheetClose=".demo-sheet-swipe-to-close"
-            href="/register"
-            text="Create New Account"
-            color="blue"
-          ></Link>
-        </div>
-      </List>
-    </PageContent>
-  </Sheet>
-</Page>
+        <List strongIos dividersIos insetIos>
+          <ListInput
+            label="E-mail"
+            type="email"
+            placeholder="Your e-mail"
+            clearButton
+            onInput={(e) => (email = e.target.value)}
+            value={email}
+            required
+            validate
+          />
+          <ListInput
+            label="Password"
+            type="password"
+            placeholder="Your password"
+            clearButton
+            onInput={(e) => (password = e.target.value)}
+            value={password}
+            required
+            validate
+            minlength="3"
+            info="Minimal 3 karakter, gabungan angka,huruf,simbol,dan kapital"
+          />
+          <div class="mt-8 justify-center">
+            <Button
+              textColor="white"
+              borderColor="#545454"
+              bgColor="black"
+              largeIos
+              tonal
+              onClick={loginDialog}>Login</Button
+            >
+          </div>
+          <div class="flex mt-2 text-sm font-medium justify-center">
+            
+            <Link
+              sheetClose=".demo-sheet-swipe-to-close"
+              href="/register"
+              text="Create New Account"
+              color="blue"
+            ></Link>
+          </div>
+        </List>
+      </PageContent>
+    </Sheet>
+  </Page>
 
 <style>
   span {
