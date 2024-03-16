@@ -1,8 +1,5 @@
 
 import path from 'path';
-
-
-
 const SRC_DIR = path.resolve(__dirname, './src');
 const PUBLIC_DIR = path.resolve(__dirname, './public');
 const BUILD_DIR = path.resolve(__dirname, './www',);

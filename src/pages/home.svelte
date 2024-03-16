@@ -1,62 +1,53 @@
 <script>
   import { each } from "dom7";
-  import { Page, Link, Toolbar, Searchbar, Button } from "framework7-svelte";
+  import {
+    Page,
+    Link,
+    Toolbar,
+    Searchbar,
+    Button,
+    BlockTitle,
+    Block,
+  } from "framework7-svelte";
+  import CategoryList from "../components/category-list.svelte";
+  import { onMount } from "svelte";
   let numbers = Array.from({ length: 10 }, (_, i) => i + 1);
+  import store from "../js/store";
+
+  let appKey = store.state.appKey;
+
+  onMount(async function () {
+    const response = await fetch("https://api.nytimes.com/svc/books/v3/lists/overview.json?date=2020-10-10  &api-key="+appKey);
+    const data = await response.json();
+    console.log(data);
+  });
 </script>
 
 <Page name="home">
   <div
     class="bg-white text-gray-800 rounded-xl shadow-lg overflow-hidden relative flex"
   >
-    <div class="bg-white h-full w-full px-5 pt-6 pb-20 overflow-y-auto">
+    <div class="bg-white h-full w-full px-5 pt-6 pb-20">
       <div class="mb-3">
         <h1 class="text-3xl font-bold">Hello Guruh</h1>
         <p class="text-sm text-gray-500 uppercase font-bold">
-          THURSDAY 6 AUGUST
+          THURSDAY 6 AUGUST {appKey}
         </p>
       </div>
 
-      <div class="block-title">3 Slides Per View, 10px Between</div>
-      <swiper-container pagination class="demo-swiper-multiple" space-between="10" slides-per-view="3">
+      <CategoryList />
 
-        {#each numbers as number}
+      <div
+        class="mt-16 w-96 h-12 py-2.5 justify-start items-center gap-8 inline-flex"
+      >
+        <div
+          class="w-64 h-7 text-indigo-950 text-lg font-bold font-['Plus Jakarta Sans']"
+        >
+          Best selling books
+        </div>
+      </div>
 
-        <swiper-slide>
-          <div class="mb-5">
-            <a
-              href="#"
-              class="block rounded-lg relative p-5 transform transition-all duration-300 scale-100 hover:scale-95"
-              style="background: url(https://images.unsplash.com/photo-1470337458703-46ad1756a187?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1649&q=80) center; background-size: cover;"
-            >
-              <div class="h-48"></div>
-              <h2 class="text-white text-2xl font-bold leading-tight mb-3 pr-5">
-                Top 5 Cocktail Bars in&nbsp;NYC
-              </h2>
-              <div
-                class="flex w-full items-center text-sm text-gray-300 font-medium"
-              >
-                <div class="flex-1 flex items-center">
-                  <div
-                    class="rounded-full w-8 h-8 mr-3"
-                    style="background: url(https://randomuser.me/api/portraits/women/55.jpg) center; background-size: cover;"
-                  ></div>
-                  <div>Kayden Buckley</div>
-                </div>
-                <div><i class="mdi mdi-thumb-up"></i> 7</div>
-              </div>
-            </a>
-          </div>
-          <div class="mb-3">
-            <h1 class="text-3xl font-bold">Yesterday</h1>
-            <p class="text-sm text-gray-500 uppercase font-bold">
-              WEDNESDAY 5 AUGUST
-            </p>
-          </div>
-        </swiper-slide>
-        {/each}
-      </swiper-container>
-
-      
+         
       <div class="flex -mx-1 mb-5">
         <div class="w-1/2 px-1">
           <a
@@ -213,8 +204,16 @@
           </div>
         </a>
       </div>
+  
+  
+
+      
     </div>
+
+    
+
   </div>
+
   <Toolbar tabbar icons position="bottom">
     <Link
       tabLink="#tab-1"

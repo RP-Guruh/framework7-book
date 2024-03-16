@@ -34,9 +34,8 @@ node_modules/
 .DS_Store
 Thumbs.db
 
-
-
-
+# env file
+config/env.js
 
 # Production build
 www/

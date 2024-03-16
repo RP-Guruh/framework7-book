@@ -1,9 +1,11 @@
 
 import { createStore } from 'framework7/lite';
+import { APP_KEY } from '../config/env';
 
 const store = createStore({
   state: {
-    isOpen: false
+    isOpen: false,
+    appKey: APP_KEY
   },
   getters: {
     isOpen({ state }) {
