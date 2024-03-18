@@ -1,1 +1,1 @@
-export const APP_KEY = YOUR_APP_KEY_HERE;
+export const APP_KEY = '03LdE64BGWjPfmlq8hLgiX4yUADlJTnQ';
